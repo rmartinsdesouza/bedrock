@@ -1,10 +1,10 @@
 <?php
 
 //Get All Pessoas
-$app->get('/api/pessoas', function($request, $response){
-	// echo 'pessoas';
+$app->get('/api/login', function($request, $response){
+	// echo 'login';
 
-	$sql = "SELECT * FROM PESSOA";
+	$sql = "SELECT * FROM LOGIN";
 
 	try{
 		//Get DB Object
@@ -13,20 +13,19 @@ $app->get('/api/pessoas', function($request, $response){
 		$db = $db->connect();
 	
 		$stmt = $db->query($sql);
-		$pessoas = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$login = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($pessoas);
+		echo json_encode($login);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
 
-
-//Get Singer Pessoa
-$app->get('/api/pessoas/{id}', function($request, $response){
+//Get Singer Login
+$app->get('/api/login/{id}', function($request, $response){
 	$id = $request->getAttribute('id');
 
-	$sql = "SELECT * FROM PESSOA WHERE CODIGO = '$id'";
+	$sql = "SELECT * FROM LOGIN WHERE CODIGO = '$id'";
 
 	try{
 		//Get DB Object
@@ -35,22 +34,20 @@ $app->get('/api/pessoas/{id}', function($request, $response){
 		$db = $db->connect();
 	
 		$stmt = $db->query($sql);
-		$pessoas = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$login = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($pessoas);
+		echo json_encode($login);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
 
-//Add Pessoa
-$app->post('/api/pessoas', function( $request, $response){
-	$NOME = $request->getParam('NOME');
-	$CPF = $request->getParam('CPF');
-	$DATA_NASCIMENTO = $request->getParam('DATA_NASCIMENTO');
-	$LOGIN_CODIGO = $request->getParam('LOGIN_CODIGO');
 
-	$sql = "INSERT INTO PESSOA (NOME, CPF, DATA_NASCIMENTO, LOGIN_CODIGO) VALUES (:NOME, :CPF, :DATA_NASCIMENTO, :LOGIN_CODIGO)";
+//Add Login
+$app->post('/api/login', function( $request, $response){
+	$DESCRICAO = $request->getParam('DESCRICAO');
+	
+	$sql = "INSERT INTO LOGIN (DESCRICAO ) VALUES (:DESCRICAO )";
 	echo $sql;
 	try{
 		//Get DB Object
@@ -60,13 +57,8 @@ $app->post('/api/pessoas', function( $request, $response){
 	
 		$stmt = $db->prepare($sql);
 
-		$stmt->bindParam(':NOME',$NOME);
-		$stmt->bindParam(':CPF',$CPF);
-		$stmt->bindParam(':DATA_NASCIMENTO',$DATA_NASCIMENTO);
-		$stmt->bindParam(':LOGIN_CODIGO',$LOGIN_CODIGO);
-		
+		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
 		$stmt->execute();
-		
 		
 		echo '{"notice": {"text": "Pessoa Adicionada"}';
 
@@ -75,19 +67,15 @@ $app->post('/api/pessoas', function( $request, $response){
 	}
 });
 
-//Update Pessoa
-$app->put('/api/pessoa/update/{id}', function(Request $request, Response $response){
+/*
+//Update Login
+$app->put('/api/login/update/{id}', function( $request, $response){
 	$CODIGO = $request->getAttribute('id');
-	$NOME = $request->getParam('NOME');
-	$CPF = $request->getParam('CPF');
-	$DATA_NASCIMENTO = $request->getParam('DATA_NASCIMENTO');
-	$LOGIN_CODIGO = $request->getParam('LOGIN_CODIGO');
+	$DESCRICAO = $request->getParam('DESCRICAO');
 
-	$sql = "UPDATE PESSOA SET
-				NOME = :NOME, 
-				CPF = :CPF, 
-				DATA_NASCIMENTO = :DATA_NASCIMENTO, 
-				LOGIN_CODIGO = :LOGIN_CODIGO
+
+	$sql = "UPDATE LOGIN SET
+				DESCRICAO = :DESCRICAO
 			WHERE CODIGO = $CODIGO";
 	
 	try{
@@ -98,11 +86,7 @@ $app->put('/api/pessoa/update/{id}', function(Request $request, Response $respon
 	
 		$stmt = $db->prepare($sql);
 
-		$stmt->bindParam(':NOME',$NOME);
-		$stmt->bindParam(':CPF',$CPF);
-		$stmt->bindParam(':DATA_NASCIMENTO',$DATA_NASCIMENTO);
-		$stmt->bindParam(':LOGIN_CODIGO',$LOGIN_CODIGO);
-		
+		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
 		$stmt->execute();
 		
 		
@@ -134,4 +118,4 @@ $app->delete('/api/pessoa/delete/{id}', function(Request $request, Response $res
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
-});
+});*/
