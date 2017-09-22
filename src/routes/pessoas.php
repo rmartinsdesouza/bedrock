@@ -1,7 +1,7 @@
 <?php
 
 //Get All Pessoas
-$app->get('/api/pessoas', function($request, $response){
+$app->get('/api/pessoa', function($request, $response){
 	// echo 'pessoas';
 
 	$sql = "SELECT * FROM PESSOA";
@@ -23,7 +23,7 @@ $app->get('/api/pessoas', function($request, $response){
 
 
 //Get Singer Pessoa
-$app->get('/api/pessoas/{id}', function($request, $response){
+$app->get('/api/pessoa/{id}', function($request, $response){
 	$id = $request->getAttribute('id');
 
 	$sql = "SELECT * FROM PESSOA WHERE CODIGO = '$id'";
@@ -44,14 +44,14 @@ $app->get('/api/pessoas/{id}', function($request, $response){
 });
 
 //Add Pessoa
-$app->post('/api/pessoas', function( $request, $response){
+$app->post('/api/pessoa', function( $request, $response){
 	$NOME = $request->getParam('NOME');
 	$CPF = $request->getParam('CPF');
 	$DATA_NASCIMENTO = $request->getParam('DATA_NASCIMENTO');
 	$LOGIN_CODIGO = $request->getParam('LOGIN_CODIGO');
 
 	$sql = "INSERT INTO PESSOA (NOME, CPF, DATA_NASCIMENTO, LOGIN_CODIGO) VALUES (:NOME, :CPF, :DATA_NASCIMENTO, :LOGIN_CODIGO)";
-	echo $sql;
+	
 	try{
 		//Get DB Object
 		$db = new db();
