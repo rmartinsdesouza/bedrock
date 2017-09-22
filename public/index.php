@@ -22,6 +22,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 //Pessoa Routes
   require_once('../src/routes/pessoas.php');
   require_once('../src/routes/login.php');
+  require_once('../src/routes/perfil.php');
 
 
 $app->run();

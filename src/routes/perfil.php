@@ -1,10 +1,10 @@
 <?php
 
-//Get All Login
-$app->get('/api/login', function($request, $response){
-	// echo 'login';
+//Get All Perfil
+$app->get('/api/perfil', function($request, $response){
+	// echo 'perfil';
 
-	$sql = "SELECT * FROM LOGIN";
+	$sql = "SELECT * FROM PERFIL";
 
 	try{
 		//Get DB Object
@@ -13,19 +13,19 @@ $app->get('/api/login', function($request, $response){
 		$db = $db->connect();
 	
 		$stmt = $db->query($sql);
-		$login = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$perfil = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($login);
+		echo json_encode($perfil);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
 
-//Get Singer Login
-$app->get('/api/login/{id}', function($request, $response){
+//Get Singer Perfil
+$app->get('/api/perfil/{id}', function($request, $response){
 	$id = $request->getAttribute('id');
 
-	$sql = "SELECT * FROM LOGIN WHERE CODIGO = '$id'";
+	$sql = "SELECT * FROM PERFIL WHERE CODIGO = '$id'";
 
 	try{
 		//Get DB Object
@@ -34,20 +34,21 @@ $app->get('/api/login/{id}', function($request, $response){
 		$db = $db->connect();
 	
 		$stmt = $db->query($sql);
-		$login = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$perfil = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($login);
+		echo json_encode($perfil);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
 
 
-//Add Login
-$app->post('/api/login', function( $request, $response){
+//Add Perfil
+$app->post('/api/perfil', function( $request, $response){
 	$DESCRICAO = $request->getParam('DESCRICAO');
+	$LOGIN_CODIGO = $request->getParam('LOGIN_CODIGO');
 	
-	$sql = "INSERT INTO LOGIN (DESCRICAO ) VALUES (:DESCRICAO )";
+	$sql = "INSERT INTO PERFIL (DESCRICAO, LOGIN_CODIGO ) VALUES (:DESCRICAO, :LOGIN_CODIGO )";
 	echo $sql;
 	try{
 		//Get DB Object
@@ -58,9 +59,10 @@ $app->post('/api/login', function( $request, $response){
 		$stmt = $db->prepare($sql);
 
 		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
+		$stmt->bindParam(':LOGIN_CODIGO', $LOGIN_CODIGO);
 		$stmt->execute();
 		
-		echo '{"notice": {"text": "Login Adicionada"}';
+		echo '{"notice": {"text": "Pessoa Adicionada"}';
 
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
@@ -68,13 +70,13 @@ $app->post('/api/login', function( $request, $response){
 });
 
 
-//Update Login
-$app->put('/api/login/update/{id}', function( $request, $response){
+//Update Perfil
+$app->put('/api/perfil/update/{id}', function( $request, $response){
 	$CODIGO = $request->getAttribute('id');
 	$DESCRICAO = $request->getParam('DESCRICAO');
 
 
-	$sql = "UPDATE LOGIN SET
+	$sql = "UPDATE PERFIL SET
 				DESCRICAO = :DESCRICAO
 			WHERE CODIGO = $CODIGO";
 	echo $sql;
@@ -87,11 +89,11 @@ $app->put('/api/login/update/{id}', function( $request, $response){
 		$stmt = $db->prepare($sql);
 
 		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
-		
+
 		$stmt->execute();
 		
 		
-		echo '{"notice": {"text": "Login Alterada"}';
+		echo '{"notice": {"text": "Pessoa Alterada"}';
 
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
@@ -99,11 +101,11 @@ $app->put('/api/login/update/{id}', function( $request, $response){
 });
 
 
-//Delete Login
-$app->delete('/api/login/{id}', function( $request,  $response){
+//Delete Perfil
+$app->delete('/api/perfil/{id}', function( $request,  $response){
 	$id = $request->getAttribute('id');
 
-	$sql = "DELETE FROM LOGIN WHERE CODIGO = '$id'";
+	$sql = "DELETE FROM PERFIL WHERE CODIGO = '$id'";
 
 	try{
 		//Get DB Object
@@ -115,7 +117,7 @@ $app->delete('/api/login/{id}', function( $request,  $response){
 		$stmt->execute();
 		$db = null;
 		
-		echo '{"notice": {"text": "Login Apagada"}';		
+		echo '{"notice": {"text": "Perfil Apagada"}';		
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
