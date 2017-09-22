@@ -115,7 +115,7 @@ $app->put('/api/pessoa/update/{id}', function(Request $request, Response $respon
 
 
 //Delete Pessoa
-$app->delete('/api/pessoa/delete/{id}', function(Request $request, Response $response){
+$app->delete('/api/pessoa/delete/{id}', function( $request,  $response){
 	$id = $request->getAttribute('id');
 
 	$sql = "DELETE FROM PESSOA WHERE CODIGO = '$id'";

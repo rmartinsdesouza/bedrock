@@ -4,6 +4,9 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_erros', 'On');
+
 require '../lib/vendor/autoload.php';
 require '../src/config/db.php';
 

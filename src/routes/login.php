@@ -67,7 +67,7 @@ $app->post('/api/login', function( $request, $response){
 	}
 });
 
-/*
+
 //Update Login
 $app->put('/api/login/update/{id}', function( $request, $response){
 	$CODIGO = $request->getAttribute('id');
@@ -77,7 +77,7 @@ $app->put('/api/login/update/{id}', function( $request, $response){
 	$sql = "UPDATE LOGIN SET
 				DESCRICAO = :DESCRICAO
 			WHERE CODIGO = $CODIGO";
-	
+	echo $sql;
 	try{
 		//Get DB Object
 		$db = new db();
@@ -87,6 +87,7 @@ $app->put('/api/login/update/{id}', function( $request, $response){
 		$stmt = $db->prepare($sql);
 
 		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
+
 		$stmt->execute();
 		
 		
@@ -98,11 +99,11 @@ $app->put('/api/login/update/{id}', function( $request, $response){
 });
 
 
-//Delete Pessoa
-$app->delete('/api/pessoa/delete/{id}', function(Request $request, Response $response){
+//Delete Login
+$app->delete('/api/login/{id}', function( $request,  $response){
 	$id = $request->getAttribute('id');
 
-	$sql = "DELETE FROM PESSOA WHERE CODIGO = '$id'";
+	$sql = "DELETE FROM LOGIN WHERE CODIGO = '$id'";
 
 	try{
 		//Get DB Object
@@ -114,8 +115,8 @@ $app->delete('/api/pessoa/delete/{id}', function(Request $request, Response $res
 		$stmt->execute();
 		$db = null;
 		
-		echo '{"notice": {"text": "Pessoa Apagada"}';		
+		echo '{"notice": {"text": "Login Apagada"}';		
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
-});*/
+});
