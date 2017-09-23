@@ -47,6 +47,7 @@ $app->get('/api/cidade/{id}', function($request, $response){
 //Add Cidade
 $app->post('/api/cidade', function( $request, $response){
 	$DESCRICAO = $request->getParam('DESCRICAO');
+	$ESTADO_CODIGO = $request->getParam('ESTADO_CODIGO');
 	
 	$sql = "INSERT INTO CIDADE (DESCRICAO, ESTADO_CODIGO ) VALUES (:DESCRICAO, :ESTADO_CODIGO )";
 	echo $sql;
@@ -70,7 +71,6 @@ $app->post('/api/cidade', function( $request, $response){
 	}
 });
 
-
 //Update Cidade
 $app->put('/api/cidade/update/{id}', function( $request, $response){
 	$CODIGO = $request->getAttribute('id');
@@ -79,8 +79,8 @@ $app->put('/api/cidade/update/{id}', function( $request, $response){
 
 
 	$sql = "UPDATE CIDADE SET
-				DESCRICAO = :DESCRICAO
-				ESTADO_CODIGO = $ESTADO_CODIGO
+				DESCRICAO = :DESCRICAO,
+				ESTADO_CODIGO = :ESTADO_CODIGO
 			WHERE CODIGO = $CODIGO";
 	echo $sql;
 	try{
@@ -126,4 +126,3 @@ $app->delete('/api/cidade/{id}', function( $request,  $response){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
-
