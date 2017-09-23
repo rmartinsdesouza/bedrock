@@ -24,6 +24,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
   require_once('../src/routes/login.php');
   require_once('../src/routes/perfil.php');
   require_once('../src/routes/estado.php');
+  require_once('../src/routes/cidade.php');
 
 
 $app->run();
