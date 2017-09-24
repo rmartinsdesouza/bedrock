@@ -15,7 +15,7 @@ $app->get('/api/pessoa', function($request, $response){
 		$stmt = $db->query($sql);
 		$pessoas = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($pessoas);
+		echo json_encode($pessoas, JSON_UNESCAPED_UNICODE);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}

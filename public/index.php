@@ -1,5 +1,7 @@
 
 <?php
+ini_set('default_charset', 'UTF-8');
+
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;

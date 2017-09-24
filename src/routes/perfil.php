@@ -15,7 +15,7 @@ $app->get('/api/perfil', function($request, $response){
 		$stmt = $db->query($sql);
 		$perfil = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($perfil);
+		echo json_encode($perfil, JSON_UNESCAPED_UNICODE);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}

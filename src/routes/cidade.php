@@ -4,6 +4,7 @@
 $app->get('/api/cidade', function($request, $response){
 	
 
+
 	$sql = "SELECT * FROM CIDADE";
 
 
@@ -16,7 +17,8 @@ $app->get('/api/cidade', function($request, $response){
 		$stmt = $db->query($sql);
 		$cidade = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($cidade);
+		echo json_encode($cidade, JSON_UNESCAPED_UNICODE );
+		// echo $cidade;
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}

@@ -16,7 +16,8 @@ $app->get('/api/campo', function($request, $response){
 		$stmt = $db->query($sql);
 		$campo = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($campo);
+		echo json_encode($campo, JSON_UNESCAPED_UNICODE);
+		
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}

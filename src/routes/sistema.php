@@ -16,7 +16,7 @@ $app->get('/api/sistema', function($request, $response){
 		$stmt = $db->query($sql);
 		$sistema = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($sistema);
+		echo json_encode($sistema, JSON_UNESCAPED_UNICODE);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}

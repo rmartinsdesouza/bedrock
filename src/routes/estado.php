@@ -16,7 +16,7 @@ $app->get('/api/estado', function($request, $response){
 		$stmt = $db->query($sql);
 		$estado = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($estado);
+		echo json_encode($estado, JSON_UNESCAPED_UNICODE);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}

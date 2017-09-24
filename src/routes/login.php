@@ -15,7 +15,7 @@ $app->get('/api/login', function($request, $response){
 		$stmt = $db->query($sql);
 		$login = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo json_encode($login);
+		echo json_encode($login, JSON_UNESCAPED_UNICODE);
 	} catch(PDOException $e){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
