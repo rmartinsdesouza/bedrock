@@ -1,5 +1,6 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
 //Get All Perfil
 $app->get('/api/perfil', function($request, $response){
 	// echo 'perfil';

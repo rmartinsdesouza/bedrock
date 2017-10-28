@@ -1,5 +1,6 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
 //Get All Sistema
 $app->get('/api/sistema', function($request, $response){
 	
