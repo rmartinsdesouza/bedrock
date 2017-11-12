@@ -22,13 +22,9 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 });
 
 //Pessoa Routes
-  require_once('../src/routes/pessoas.php');
   require_once('../src/routes/login.php');
-  require_once('../src/routes/perfil.php');
-  require_once('../src/routes/estado.php');
-  require_once('../src/routes/cidade.php');
-  require_once('../src/routes/campo.php');
-  require_once('../src/routes/sistema.php');
+  require_once('../src/routes/aniversariante.php');
+
 
 
 $app->run();

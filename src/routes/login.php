@@ -47,9 +47,10 @@ $app->get('/api/login/{id}', function($request, $response){
 
 //Add Login
 $app->post('/api/login', function( $request, $response){
-	$DESCRICAO = $request->getParam('DESCRICAO');
+	$CPF = $request->getParam('CPF');
+	$SENHA = $request->getParam('SENHA');
 	
-	$sql = "INSERT INTO LOGIN (DESCRICAO ) VALUES (:DESCRICAO )";
+	$sql = "INSERT INTO LOGIN (CPF, SENHA ) VALUES (:CPF, :SENHA )";
 	echo $sql;
 	try{
 		//Get DB Object
@@ -59,7 +60,8 @@ $app->post('/api/login', function( $request, $response){
 	
 		$stmt = $db->prepare($sql);
 
-		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
+		$stmt->bindParam(':CPF',$CPF);
+		$stmt->bindParam(':SENHA',$SENHA);
 		$stmt->execute();
 		
 		echo '{"notice": {"text": "Login Adicionada"}';
@@ -73,11 +75,13 @@ $app->post('/api/login', function( $request, $response){
 //Update Login
 $app->put('/api/login/update/{id}', function( $request, $response){
 	$CODIGO = $request->getAttribute('id');
-	$DESCRICAO = $request->getParam('DESCRICAO');
+	$CPF = $request->getParam('CPF');
+	$SENHA = $request->getParam('SENHA');
 
 
 	$sql = "UPDATE LOGIN SET
-				DESCRICAO = :DESCRICAO
+				CPF = :CPF,
+				SENHA = :SENHA
 			WHERE CODIGO = $CODIGO";
 	echo $sql;
 	try{
@@ -88,7 +92,8 @@ $app->put('/api/login/update/{id}', function( $request, $response){
 	
 		$stmt = $db->prepare($sql);
 
-		$stmt->bindParam(':DESCRICAO',$DESCRICAO);
+		$stmt->bindParam(':CPF',$CPF);
+		$stmt->bindParam(':SENHA',$SENHA);
 		
 		$stmt->execute();
 		

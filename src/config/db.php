@@ -24,7 +24,7 @@ header("Access-Control-Allow-Methods:OPTIONS, DELETE, POST, PUT, GET");
 		private $dbhost = 'localhost';
 		private $dbuser = 'root';
 		private $dbpass = '';
-		private $dbname = 'bedrock';
+		private $dbname = 'aniversariante';
 
 		public function connect(){
 
